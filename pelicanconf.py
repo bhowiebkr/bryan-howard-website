@@ -50,7 +50,7 @@ DELETE_OUTPUT_DIRECTORY = True
 OUTPUT_RETENTION = ['.git', '.github']
 
 # Theme Configuration
-THEME = 'theme'
+# THEME = 'theme'  # Custom theme will be added in Phase 3
 DIRECT_TEMPLATES = ['index', 'tags', 'categories', 'archives', 'sitemap']
 SITEMAP_SAVE_AS = 'sitemap.xml'
 
@@ -120,4 +120,3 @@ TYPOGRIFY = True
 
 # Development Settings
 LOAD_CONTENT_CACHE = False
-AUTORELOAD_IGNORE_CACHE = True
