@@ -1,1 +1,0 @@
-from .analytics_plugin import register

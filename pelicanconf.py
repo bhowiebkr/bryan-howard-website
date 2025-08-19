@@ -95,7 +95,6 @@ PLUGINS = [
     'youtube_integration',
     'github_integration',
     'seo_enhancement',
-    'analytics_monitoring',
 ]
 
 # Sitemap Configuration
@@ -141,11 +140,7 @@ YOUTUBE_CHANNEL_ID = ''  # Optional: Set if you know your channel ID
 # GitHub Integration Settings  
 GITHUB_USERNAME = 'bhowiebkr'
 
-# Analytics and Monitoring Settings
-PRIVACY_MODE = True
-COOKIE_CONSENT = True
-PERFORMANCE_MONITORING = True
-ERROR_TRACKING = True
+# Analytics settings removed
 
 # SEO Enhancement Settings
 # Most SEO settings are automatically handled by the seo_enhancement plugin
