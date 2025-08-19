@@ -51,8 +51,8 @@ OUTPUT_RETENTION = ['.git', '.github']
 
 # Theme Configuration
 # THEME = 'theme'  # Custom theme will be added in Phase 3
-DIRECT_TEMPLATES = ['index', 'tags', 'categories', 'archives', 'sitemap']
-SITEMAP_SAVE_AS = 'sitemap.xml'
+DIRECT_TEMPLATES = ['index', 'tags', 'categories', 'archives']
+# SITEMAP_SAVE_AS = 'sitemap.xml'  # Will be enabled with custom theme in Phase 3
 
 # Blog Settings
 DEFAULT_PAGINATION = 10
@@ -90,24 +90,24 @@ MENUITEMS = (
 # Plugin Configuration
 PLUGIN_PATHS = ['plugins']
 PLUGINS = [
-    'sitemap',
+    # 'sitemap',  # Will be enabled with custom theme in Phase 3
 ]
 
-# Sitemap Configuration
-SITEMAP = {
-    'format': 'xml',
-    'priorities': {
-        'articles': 0.7,
-        'indexes': 0.5,
-        'pages': 0.6,
-    },
-    'changefreqs': {
-        'articles': 'weekly',
-        'indexes': 'daily',
-        'pages': 'monthly',
-    },
-    'exclude': ['tag/', 'category/', 'author/']
-}
+# Sitemap Configuration (disabled for default theme)
+# SITEMAP = {
+#     'format': 'xml',
+#     'priorities': {
+#         'articles': 0.7,
+#         'indexes': 0.5,
+#         'pages': 0.6,
+#     },
+#     'changefreqs': {
+#         'articles': 'weekly',
+#         'indexes': 'daily',
+#         'pages': 'monthly',
+#     },
+#     'exclude': ['tag/', 'category/', 'author/']
+# }
 
 # Date Format
 DEFAULT_DATE_FORMAT = '%B %d, %Y'
