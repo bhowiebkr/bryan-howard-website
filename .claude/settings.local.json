@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:chriswiegman.com)",
+      "Bash(powershell:*)",
+      "Bash(mkdir:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(python:*)",
+      "Bash(pelican-envScripts:*)",
+      "Bash(pip install:*)",
+      "Bash(pelican-env\\Scripts\\activate:*)",
+      "Bash(curl:*)"
+    ],
+    "deny": []
+  }
+}
