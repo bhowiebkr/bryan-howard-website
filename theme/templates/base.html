@@ -50,6 +50,15 @@
     <link rel="alternate" type="application/rss+xml" title="{{ SITENAME }} - RSS Feed" href="{{ SITEURL }}/{{ FEED_ALL_RSS }}">
     {% endif %}
     
+    <!-- Structured Data -->
+    {% if structured_data %}
+    <script type="application/ld+json">
+    {{ structured_data.website | tojson }}
+    </script>
+    {% endif %}
+    
+    {% block structured_data %}{% endblock %}
+    
     {% block extra_head %}{% endblock %}
 </head>
 
@@ -78,16 +87,7 @@
     <script src="{{ SITEURL }}/theme/js/main.js"></script>
     {% block extra_js %}{% endblock %}
     
-    <!-- Analytics -->
-    {% if GOOGLE_ANALYTICS %}
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '{{ GOOGLE_ANALYTICS }}');
-    </script>
-    {% endif %}
+    <!-- Analytics and Monitoring -->
+    {% include 'partials/analytics.html' %}
 </body>
 </html>

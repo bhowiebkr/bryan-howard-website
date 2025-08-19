@@ -92,6 +92,10 @@ MENUITEMS = (
 PLUGIN_PATHS = ['plugins']
 PLUGINS = [
     'sitemap',
+    'youtube_integration',
+    'github_integration',
+    'seo_enhancement',
+    'analytics_monitoring',
 ]
 
 # Sitemap Configuration
@@ -129,6 +133,27 @@ DISPLAY_ARTICLE_INFO_ON_INDEX = True
 DISPLAY_RECENT_POSTS_ON_SIDEBAR = False
 DISPLAY_CATEGORIES_ON_SIDEBAR = False
 DISPLAY_TAGS_ON_SIDEBAR = False
+
+# YouTube Integration Settings
+YOUTUBE_CHANNEL_USERNAME = 'BryanHoward'
+YOUTUBE_CHANNEL_ID = ''  # Optional: Set if you know your channel ID
+
+# GitHub Integration Settings  
+GITHUB_USERNAME = 'bhowiebkr'
+
+# Analytics and Monitoring Settings
+PRIVACY_MODE = True
+COOKIE_CONSENT = True
+PERFORMANCE_MONITORING = True
+ERROR_TRACKING = True
+
+# SEO Enhancement Settings
+# Most SEO settings are automatically handled by the seo_enhancement plugin
+
+# Production Feed Settings (uncomment for production)
+# FEED_ALL_ATOM = 'feeds/all.atom.xml'
+# FEED_ALL_RSS = 'feeds/all.rss.xml'
+# CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
 
 # Development Settings
 LOAD_CONTENT_CACHE = False

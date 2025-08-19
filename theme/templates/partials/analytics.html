@@ -1,0 +1,192 @@
+<!-- Analytics and Monitoring Scripts -->
+
+{% if analytics %}
+  <!-- Google Analytics 4 (gtag.js) -->
+  {% if analytics.gtag_id and gtag_script %}
+    {{ gtag_script | safe }}
+  {% endif %}
+
+  <!-- Performance Monitoring -->
+  {% if analytics.performance_monitoring and performance_script %}
+    {{ performance_script | safe }}
+  {% endif %}
+
+  <!-- Cookie Consent -->
+  {% if analytics.cookie_consent and cookie_consent_script %}
+    {{ cookie_consent_script | safe }}
+  {% endif %}
+{% endif %}
+
+<!-- Privacy-First Analytics Alternative -->
+<script>
+  // Simple, privacy-first analytics
+  (function() {
+    'use strict';
+    
+    // Only track if consent given or privacy mode disabled
+    const trackingEnabled = !document.querySelector('[data-privacy-mode="true"]') || 
+                           localStorage.getItem('cookieConsent') === 'accepted';
+    
+    if (!trackingEnabled) return;
+    
+    // Track page views
+    function trackPageView() {
+      const data = {
+        url: window.location.pathname,
+        referrer: document.referrer,
+        timestamp: Date.now(),
+        userAgent: navigator.userAgent,
+        screen: screen.width + 'x' + screen.height,
+        language: navigator.language
+      };
+      
+      // Send to analytics endpoint (implement server-side)
+      // fetch('/analytics/pageview', { method: 'POST', body: JSON.stringify(data) });
+    }
+    
+    // Track engagement events
+    function trackEvent(eventName, eventData) {
+      if (!trackingEnabled) return;
+      
+      const data = {
+        event: eventName,
+        data: eventData,
+        url: window.location.pathname,
+        timestamp: Date.now()
+      };
+      
+      // Send to analytics endpoint
+      // fetch('/analytics/event', { method: 'POST', body: JSON.stringify(data) });
+    }
+    
+    // Track scroll depth
+    let maxScroll = 0;
+    const scrollMilestones = [25, 50, 75, 90, 100];
+    const trackedMilestones = new Set();
+    
+    function trackScrollDepth() {
+      const scrollTop = window.pageYOffset;
+      const documentHeight = document.documentElement.scrollHeight;
+      const windowHeight = window.innerHeight;
+      const scrollPercent = Math.round((scrollTop / (documentHeight - windowHeight)) * 100);
+      
+      if (scrollPercent > maxScroll) {
+        maxScroll = scrollPercent;
+        
+        scrollMilestones.forEach(milestone => {
+          if (scrollPercent >= milestone && !trackedMilestones.has(milestone)) {
+            trackedMilestones.add(milestone);
+            trackEvent('scroll_depth', { percentage: milestone });
+          }
+        });
+      }
+    }
+    
+    // Track time on page
+    let startTime = Date.now();
+    let isActive = true;
+    
+    function trackTimeOnPage() {
+      if (!isActive) return;
+      
+      const timeSpent = Date.now() - startTime;
+      const timeInSeconds = Math.round(timeSpent / 1000);
+      
+      if (timeInSeconds > 10) { // Only track if user spent more than 10 seconds
+        trackEvent('time_on_page', { seconds: timeInSeconds });
+      }
+    }
+    
+    // Track user activity
+    ['focus', 'blur', 'beforeunload'].forEach(event => {
+      window.addEventListener(event, () => {
+        if (event === 'focus') {
+          isActive = true;
+          startTime = Date.now();
+        } else if (event === 'blur') {
+          isActive = false;
+        } else if (event === 'beforeunload') {
+          trackTimeOnPage();
+        }
+      });
+    });
+    
+    // Initialize tracking
+    trackPageView();
+    
+    // Track scroll every 500ms
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(trackScrollDepth, 500);
+    }, { passive: true });
+    
+    // Track external link clicks
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (link && link.hostname !== window.location.hostname) {
+        trackEvent('external_link_click', { 
+          url: link.href,
+          text: link.textContent.trim()
+        });
+      }
+    });
+    
+    // Track form submissions
+    document.addEventListener('submit', (e) => {
+      const form = e.target;
+      if (form.tagName === 'FORM') {
+        trackEvent('form_submission', {
+          action: form.action,
+          method: form.method,
+          id: form.id || 'unnamed'
+        });
+      }
+    });
+    
+    // Export tracking function for manual events
+    window.trackEvent = trackEvent;
+    
+  })();
+</script>
+
+<!-- Development Performance Monitoring -->
+{% if SITEURL == 'http://localhost:8000' %}
+<script>
+  // Development performance monitoring
+  console.group('🚀 Performance Metrics');
+  
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const perfData = performance.getEntriesByType('navigation')[0];
+      const paintEntries = performance.getEntriesByType('paint');
+      
+      const metrics = {
+        'DNS Lookup': Math.round(perfData.domainLookupEnd - perfData.domainLookupStart) + 'ms',
+        'TCP Connection': Math.round(perfData.connectEnd - perfData.connectStart) + 'ms',
+        'Server Response': Math.round(perfData.responseEnd - perfData.requestStart) + 'ms',
+        'DOM Content Loaded': Math.round(perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart) + 'ms',
+        'Page Load': Math.round(perfData.loadEventEnd - perfData.loadEventStart) + 'ms',
+        'Total Load Time': Math.round(perfData.loadEventEnd - perfData.navigationStart) + 'ms'
+      };
+      
+      paintEntries.forEach(entry => {
+        metrics[entry.name] = Math.round(entry.startTime) + 'ms';
+      });
+      
+      Object.entries(metrics).forEach(([key, value]) => {
+        console.log(`${key}: ${value}`);
+      });
+      
+      console.groupEnd();
+      
+      // Warn about performance issues
+      const totalTime = perfData.loadEventEnd - perfData.navigationStart;
+      if (totalTime > 3000) {
+        console.warn('⚠️ Page load time is over 3 seconds. Consider optimizing.');
+      }
+      
+    }, 100);
+  });
+</script>
+{% endif %}

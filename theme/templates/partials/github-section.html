@@ -1,0 +1,107 @@
+<!-- GitHub Repositories Section -->
+{% if github and not github.fallback %}
+<section class="github-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fab fa-github" aria-hidden="true"></i>
+                Recent Projects
+            </h2>
+            <p class="section-description">
+                Explore my latest open source projects and contributions
+            </p>
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-number">{{ github.profile.public_repos }}</span>
+                    <span class="stat-label">Repositories</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">{{ github.profile.followers }}</span>
+                    <span class="stat-label">Followers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">{{ github.profile.following }}</span>
+                    <span class="stat-label">Following</span>
+                </div>
+            </div>
+        </div>
+        
+        {% if github.repositories %}
+        <div class="repositories-grid">
+            {% for repo in github.repositories[:6] %}
+            <article class="repository-card">
+                <div class="repo-header">
+                    <h3 class="repo-name">
+                        <a href="{{ repo.html_url }}" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-code-branch" aria-hidden="true"></i>
+                            {{ repo.name }}
+                        </a>
+                    </h3>
+                    {% if repo.is_fork %}
+                    <span class="repo-fork-badge">
+                        <i class="fas fa-code-branch" aria-hidden="true"></i>
+                        Fork
+                    </span>
+                    {% endif %}
+                </div>
+                
+                {% if repo.description %}
+                <p class="repo-description">{{ repo.description }}</p>
+                {% endif %}
+                
+                <div class="repo-stats">
+                    {% if repo.language %}
+                    <span class="repo-language">
+                        <span class="language-dot" style="background-color: #3178c6;"></span>
+                        {{ repo.language }}
+                    </span>
+                    {% endif %}
+                    
+                    {% if repo.stargazers_count > 0 %}
+                    <span class="repo-stars">
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        {{ repo.stargazers_count }}
+                    </span>
+                    {% endif %}
+                    
+                    {% if repo.forks_count > 0 %}
+                    <span class="repo-forks">
+                        <i class="fas fa-code-branch" aria-hidden="true"></i>
+                        {{ repo.forks_count }}
+                    </span>
+                    {% endif %}
+                </div>
+                
+                {% if repo.topics %}
+                <div class="repo-topics">
+                    {% for topic in repo.topics[:3] %}
+                    <span class="topic-tag">{{ topic }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <div class="repo-footer">
+                    <time class="repo-updated" datetime="{{ repo.updated_at }}">
+                        Updated {{ repo.updated_at[:10] }}
+                    </time>
+                    {% if repo.latest_release %}
+                    <span class="repo-release">
+                        <i class="fas fa-tag" aria-hidden="true"></i>
+                        {{ repo.latest_release.tag_name }}
+                    </span>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        
+        <div class="section-footer">
+            <a href="{{ github.profile.html_url }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github" aria-hidden="true"></i>
+                View All Repositories
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}

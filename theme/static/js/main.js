@@ -550,6 +550,175 @@
         }
     }
 
+    // YouTube Video Cards Enhancement
+    class YouTubeEnhancements {
+        constructor() {
+            this.videoCards = document.querySelectorAll('.video-card');
+            this.init();
+        }
+        
+        init() {
+            this.videoCards.forEach(card => {
+                this.enhanceVideoCard(card);
+            });
+        }
+        
+        enhanceVideoCard(card) {
+            const thumbnail = card.querySelector('.video-thumbnail');
+            const playOverlay = card.querySelector('.play-overlay');
+            
+            if (thumbnail && playOverlay) {
+                // Add hover effects
+                thumbnail.addEventListener('mouseenter', () => {
+                    playOverlay.style.transform = 'scale(1.1)';
+                    playOverlay.style.opacity = '0.9';
+                });
+                
+                thumbnail.addEventListener('mouseleave', () => {
+                    playOverlay.style.transform = 'scale(1)';
+                    playOverlay.style.opacity = '0.8';
+                });
+                
+                // Add keyboard navigation
+                const link = thumbnail.querySelector('a');
+                if (link) {
+                    link.addEventListener('focus', () => {
+                        thumbnail.style.transform = 'scale(1.02)';
+                    });
+                    
+                    link.addEventListener('blur', () => {
+                        thumbnail.style.transform = 'scale(1)';
+                    });
+                }
+            }
+        }
+    }
+    
+    // GitHub Repository Cards Enhancement
+    class GitHubEnhancements {
+        constructor() {
+            this.repoCards = document.querySelectorAll('.repository-card');
+            this.init();
+        }
+        
+        init() {
+            this.repoCards.forEach(card => {
+                this.enhanceRepoCard(card);
+            });
+        }
+        
+        enhanceRepoCard(card) {
+            const repoLink = card.querySelector('.repo-name a');
+            
+            if (repoLink) {
+                // Make entire card clickable
+                card.style.cursor = 'pointer';
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `View ${repoLink.textContent} repository`);
+                
+                // Handle click on card
+                card.addEventListener('click', (e) => {
+                    if (e.target.tagName !== 'A') {
+                        repoLink.click();
+                    }
+                });
+                
+                // Handle keyboard navigation
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        repoLink.click();
+                    }
+                });
+                
+                // Add focus styles
+                card.addEventListener('focus', () => {
+                    card.style.outline = '2px solid var(--color-primary)';
+                    card.style.outlineOffset = '2px';
+                });
+                
+                card.addEventListener('blur', () => {
+                    card.style.outline = 'none';
+                });
+            }
+        }
+    }
+    
+    // Scroll to Top Button
+    class ScrollToTop {
+        constructor() {
+            this.button = null;
+            this.init();
+        }
+        
+        init() {
+            this.createButton();
+            this.handleScroll();
+        }
+        
+        createButton() {
+            this.button = document.createElement('button');
+            this.button.innerHTML = '<i class="fas fa-arrow-up" aria-hidden="true"></i>';
+            this.button.className = 'scroll-to-top';
+            this.button.setAttribute('aria-label', 'Scroll to top');
+            this.button.style.cssText = `
+                position: fixed;
+                bottom: 2rem;
+                right: 2rem;
+                width: 3rem;
+                height: 3rem;
+                border: none;
+                border-radius: 50%;
+                background-color: var(--color-primary);
+                color: white;
+                cursor: pointer;
+                opacity: 0;
+                transform: translateY(100px);
+                transition: all 0.3s ease;
+                z-index: 1000;
+                box-shadow: 0 4px 12px var(--shadow-md);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            
+            document.body.appendChild(this.button);
+            
+            this.button.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        handleScroll() {
+            let ticking = false;
+            
+            const updateButton = () => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 500) {
+                    this.button.style.opacity = '1';
+                    this.button.style.transform = 'translateY(0)';
+                } else {
+                    this.button.style.opacity = '0';
+                    this.button.style.transform = 'translateY(100px)';
+                }
+                
+                ticking = false;
+            };
+            
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateButton);
+                    ticking = true;
+                }
+            }, { passive: true });
+        }
+    }
+
     // Initialize all modules when DOM is ready
     function init() {
         new MobileNavigation();
@@ -560,6 +729,9 @@
         new CodeCopyButtons();
         new FormEnhancement();
         new Analytics();
+        new YouTubeEnhancements();
+        new GitHubEnhancements();
+        new ScrollToTop();
         
         // Add loaded class to body for CSS transitions
         document.body.classList.add('loaded');
