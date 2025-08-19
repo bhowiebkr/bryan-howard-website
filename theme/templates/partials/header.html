@@ -1,0 +1,74 @@
+<div class="header-container">
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </button>
+    
+    <!-- Logo/Brand -->
+    <div class="site-brand">
+        <a href="{{ SITEURL }}/" class="brand-link">
+            <span class="brand-name">{{ SITENAME }}</span>
+            {% if SITESUBTITLE %}
+            <span class="brand-subtitle">{{ SITESUBTITLE }}</span>
+            {% endif %}
+        </a>
+    </div>
+    
+    <!-- Main Navigation -->
+    <nav class="main-nav" aria-label="Main navigation">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="{{ SITEURL }}/" class="nav-link">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ SITEURL }}/about/" class="nav-link">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <span>About</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ SITEURL }}/archives/" class="nav-link">
+                    <i class="fas fa-blog" aria-hidden="true"></i>
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ SITEURL }}/projects/" class="nav-link">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ SITEURL }}/contact/" class="nav-link">
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- Social Links -->
+    <div class="header-social">
+        {% if SOCIAL %}
+        <ul class="social-menu">
+            {% for name, link, icon in SOCIAL %}
+            <li class="social-item">
+                <a href="{{ link }}" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="{{ name }}">
+                    <i class="{{ icon }}" aria-hidden="true"></i>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
+        <!-- Theme Toggle (Future Implementation) -->
+        <button class="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>

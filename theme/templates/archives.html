@@ -1,0 +1,514 @@
+{% extends "base.html" %}
+
+{% block title %}Blog Archives - {{ SITENAME }}{% endblock %}
+
+{% block description %}Browse all blog posts and articles from {{ SITENAME }}.{% endblock %}
+
+{% block body_class %}archives-page{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">Blog Archives</h1>
+        <p class="page-subtitle">
+            {% if articles %}
+            {{ articles|length }} post{% if articles|length != 1 %}s{% endif %} published
+            {% else %}
+            No posts published yet
+            {% endif %}
+        </p>
+    </header>
+
+    {% if articles %}
+    <!-- Archives Content -->
+    <div class="archives-content">
+        <!-- Search and Filter Section -->
+        <div class="archives-filters">
+            <div class="search-box">
+                <input type="text" id="search-input" class="form-input" placeholder="Search posts...">
+                <i class="fas fa-search search-icon" aria-hidden="true"></i>
+            </div>
+            
+            <!-- Category Filter -->
+            {% if categories %}
+            <div class="filter-group">
+                <label for="category-filter" class="filter-label">Category</label>
+                <select id="category-filter" class="form-input">
+                    <option value="">All Categories</option>
+                    {% for category, articles_in_category in categories %}
+                    <option value="{{ category }}">{{ category }} ({{ articles_in_category|length }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endif %}
+            
+            <!-- Tag Filter -->
+            {% if tags %}
+            <div class="filter-group">
+                <label for="tag-filter" class="filter-label">Tag</label>
+                <select id="tag-filter" class="form-input">
+                    <option value="">All Tags</option>
+                    {% for tag, articles_with_tag in tags %}
+                    <option value="{{ tag }}">{{ tag }} ({{ articles_with_tag|length }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endif %}
+            
+            <!-- Sort Options -->
+            <div class="filter-group">
+                <label for="sort-filter" class="filter-label">Sort by</label>
+                <select id="sort-filter" class="form-input">
+                    <option value="date-desc">Newest First</option>
+                    <option value="date-asc">Oldest First</option>
+                    <option value="title-asc">Title A-Z</option>
+                    <option value="title-desc">Title Z-A</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Archives Grid -->
+        <div class="archives-grid" id="archives-grid">
+            {% for article in articles %}
+            <article class="archive-card" 
+                     data-title="{{ article.title|lower }}"
+                     data-category="{{ article.category|lower if article.category else '' }}"
+                     data-tags="{% for tag in article.tags %}{{ tag|lower }}{% if not loop.last %},{% endif %}{% endfor %}"
+                     data-date="{{ article.date.isoformat() }}">
+                
+                {% if article.featured_image %}
+                <div class="archive-image">
+                    <img src="{{ SITEURL }}/{{ article.featured_image }}" alt="{{ article.title }}" loading="lazy">
+                </div>
+                {% endif %}
+                
+                <div class="archive-content">
+                    <div class="archive-meta">
+                        <time class="archive-date" datetime="{{ article.date.isoformat() }}">
+                            {{ article.locale_date }}
+                        </time>
+                        {% if article.category %}
+                        <span class="archive-category">
+                            <a href="{{ SITEURL }}/{{ article.category.url }}" class="meta-link">
+                                {{ article.category }}
+                            </a>
+                        </span>
+                        {% endif %}
+                        <span class="reading-time">
+                            {{ article.content | wordcount // 200 or 1 }} min read
+                        </span>
+                    </div>
+                    
+                    <h2 class="archive-title">
+                        <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+                    </h2>
+                    
+                    {% if article.summary %}
+                    <p class="archive-summary">{{ article.summary|striptags|truncate(120) }}</p>
+                    {% endif %}
+                    
+                    {% if article.tags %}
+                    <div class="archive-tags">
+                        {% for tag in article.tags[:3] %}
+                        <a href="{{ SITEURL }}/{{ tag.url }}" class="tag-link">{{ tag }}</a>
+                        {% endfor %}
+                        {% if article.tags|length > 3 %}
+                        <span class="tag-more">+{{ article.tags|length - 3 }}</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    <a href="{{ SITEURL }}/{{ article.url }}" class="read-more-link">
+                        Read More
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <!-- No Results Message -->
+        <div id="no-results" class="no-results" style="display: none;">
+            <div class="no-results-content">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <h3>No posts found</h3>
+                <p>Try adjusting your search or filter criteria.</p>
+            </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="load-more-section">
+            <button id="load-more" class="btn btn-secondary" style="display: none;">
+                Load More Posts
+            </button>
+        </div>
+    </div>
+
+    <!-- Archive Statistics -->
+    <aside class="archive-stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">{{ articles|length }}</div>
+                <div class="stat-label">Total Posts</div>
+            </div>
+            {% if categories %}
+            <div class="stat-item">
+                <div class="stat-number">{{ categories|length }}</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            {% endif %}
+            {% if tags %}
+            <div class="stat-item">
+                <div class="stat-number">{{ tags|length }}</div>
+                <div class="stat-label">Tags</div>
+            </div>
+            {% endif %}
+            <div class="stat-item">
+                <div class="stat-number">{{ (articles | map(attribute='content') | map('wordcount') | sum / 200) | round | int }}</div>
+                <div class="stat-label">Total Reading Time (min)</div>
+            </div>
+        </div>
+    </aside>
+    {% else %}
+    <!-- Empty State -->
+    <div class="empty-state">
+        <i class="fas fa-blog" aria-hidden="true"></i>
+        <h2>No posts yet</h2>
+        <p>Check back soon for new content!</p>
+        <a href="{{ SITEURL }}/" class="btn btn-primary">
+            <i class="fas fa-home" aria-hidden="true"></i>
+            Go Home
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+/* Archives-specific styles */
+.page-header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+}
+
+.page-title {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-4);
+}
+
+.page-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+}
+
+.archives-filters {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+    padding: var(--space-6);
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    right: var(--space-3);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.filter-label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+}
+
+.archives-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+}
+
+.archive-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.archive-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px var(--shadow-lg);
+    border-color: var(--border-secondary);
+}
+
+.archive-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.archive-content {
+    padding: var(--space-6);
+}
+
+.archive-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+}
+
+.archive-date,
+.archive-category,
+.reading-time {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.archive-title {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-3);
+}
+
+.archive-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.archive-title a:hover {
+    color: var(--color-primary);
+}
+
+.archive-summary {
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-4);
+}
+
+.archive-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.tag-more {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+}
+
+.read-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: all var(--transition-fast);
+}
+
+.read-more-link:hover {
+    color: var(--color-primary-hover);
+    gap: var(--space-3);
+}
+
+.no-results {
+    text-align: center;
+    padding: var(--space-12) var(--space-4);
+}
+
+.no-results-content {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.no-results i {
+    font-size: var(--text-4xl);
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+}
+
+.no-results h3 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-2);
+}
+
+.no-results p {
+    color: var(--text-secondary);
+}
+
+.load-more-section {
+    text-align: center;
+    margin-top: var(--space-8);
+}
+
+.archive-stats {
+    margin-top: var(--space-12);
+    padding: var(--space-8);
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--space-6);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+}
+
+.stat-label {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.empty-state {
+    text-align: center;
+    padding: var(--space-16) var(--space-4);
+}
+
+.empty-state i {
+    font-size: var(--text-5xl);
+    color: var(--text-muted);
+    margin-bottom: var(--space-6);
+}
+
+.empty-state h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-4);
+}
+
+.empty-state p {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-8);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .archives-filters {
+        grid-template-columns: 1fr;
+        gap: var(--space-3);
+    }
+    
+    .archives-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .archive-meta {
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .page-title {
+        font-size: var(--text-3xl);
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+}
+</style>
+
+<script>
+// Archives filtering and search functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const categoryFilter = document.getElementById('category-filter');
+    const tagFilter = document.getElementById('tag-filter');
+    const sortFilter = document.getElementById('sort-filter');
+    const archivesGrid = document.getElementById('archives-grid');
+    const noResults = document.getElementById('no-results');
+    const cards = Array.from(document.querySelectorAll('.archive-card'));
+    
+    function filterAndSort() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedCategory = categoryFilter ? categoryFilter.value.toLowerCase() : '';
+        const selectedTag = tagFilter ? tagFilter.value.toLowerCase() : '';
+        const sortBy = sortFilter.value;
+        
+        let filteredCards = cards.filter(card => {
+            const title = card.dataset.title;
+            const category = card.dataset.category;
+            const tags = card.dataset.tags;
+            
+            const matchesSearch = !searchTerm || title.includes(searchTerm);
+            const matchesCategory = !selectedCategory || category === selectedCategory;
+            const matchesTag = !selectedTag || tags.split(',').includes(selectedTag);
+            
+            return matchesSearch && matchesCategory && matchesTag;
+        });
+        
+        // Sort filtered cards
+        filteredCards.sort((a, b) => {
+            switch (sortBy) {
+                case 'date-asc':
+                    return new Date(a.dataset.date) - new Date(b.dataset.date);
+                case 'date-desc':
+                    return new Date(b.dataset.date) - new Date(a.dataset.date);
+                case 'title-asc':
+                    return a.dataset.title.localeCompare(b.dataset.title);
+                case 'title-desc':
+                    return b.dataset.title.localeCompare(a.dataset.title);
+                default:
+                    return 0;
+            }
+        });
+        
+        // Hide all cards
+        cards.forEach(card => card.style.display = 'none');
+        
+        // Show filtered cards
+        if (filteredCards.length > 0) {
+            filteredCards.forEach(card => card.style.display = 'block');
+            noResults.style.display = 'none';
+        } else {
+            noResults.style.display = 'block';
+        }
+    }
+    
+    // Add event listeners
+    if (searchInput) searchInput.addEventListener('input', filterAndSort);
+    if (categoryFilter) categoryFilter.addEventListener('change', filterAndSort);
+    if (tagFilter) tagFilter.addEventListener('change', filterAndSort);
+    if (sortFilter) sortFilter.addEventListener('change', filterAndSort);
+});
+</script>
+{% endblock %}

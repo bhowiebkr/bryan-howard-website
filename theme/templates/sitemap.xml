@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Homepage -->
+    <url>
+        <loc>{{ SITEURL }}/</loc>
+        <lastmod>{% for article in articles[:1] %}{{ article.date.strftime('%Y-%m-%d') }}{% endfor %}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Articles -->
+    {% for article in articles %}
+    <url>
+        <loc>{{ SITEURL }}/{{ article.url }}</loc>
+        <lastmod>{{ article.modified.strftime('%Y-%m-%d') if article.modified else article.date.strftime('%Y-%m-%d') }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    {% endfor %}
+    
+    <!-- Pages -->
+    {% for page in pages %}
+    <url>
+        <loc>{{ SITEURL }}/{{ page.url }}</loc>
+        <lastmod>{{ page.modified.strftime('%Y-%m-%d') if page.modified else page.date.strftime('%Y-%m-%d') if page.date else '2025-01-01' }}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    {% endfor %}
+    
+    <!-- Archives -->
+    <url>
+        <loc>{{ SITEURL }}/archives/</loc>
+        <lastmod>{% for article in articles[:1] %}{{ article.date.strftime('%Y-%m-%d') }}{% endfor %}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- Categories -->
+    {% for category, articles in categories %}
+    <url>
+        <loc>{{ SITEURL }}/{{ category.url }}</loc>
+        <lastmod>{% for article in articles[:1] %}{{ article.date.strftime('%Y-%m-%d') }}{% endfor %}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    {% endfor %}
+    
+    <!-- Tags -->
+    {% for tag, articles in tags %}
+    <url>
+        <loc>{{ SITEURL }}/{{ tag.url }}</loc>
+        <lastmod>{% for article in articles[:1] %}{{ article.date.strftime('%Y-%m-%d') }}{% endfor %}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    {% endfor %}
+</urlset>

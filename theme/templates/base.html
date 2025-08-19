@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}" class="theme-dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Title and Meta -->
+    <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{{ SITEDESCRIPTION }}{% endblock %}">
+    <meta name="author" content="{{ AUTHOR }}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{{ SITEURL }}{% block og_url %}/{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}{{ SITENAME }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ SITEDESCRIPTION }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ SITEURL }}/theme/images/og-image.jpg{% endblock %}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ SITEURL }}{% block twitter_url %}/{% endblock %}">
+    <meta property="twitter:title" content="{% block twitter_title %}{{ SITENAME }}{% endblock %}">
+    <meta property="twitter:description" content="{% block twitter_description %}{{ SITEDESCRIPTION }}{% endblock %}">
+    <meta property="twitter:image" content="{% block twitter_image %}{{ SITEURL }}/theme/images/og-image.jpg{% endblock %}">
+    {% if TWITTER_USERNAME %}
+    <meta name="twitter:creator" content="@{{ TWITTER_USERNAME }}">
+    {% endif %}
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ SITEURL }}/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ SITEURL }}/theme/images/apple-touch-icon.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/variables.css">
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/base.css">
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/components.css">
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/layout.css">
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/responsive.css">
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/enhancements.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Feeds -->
+    {% if FEED_ALL_ATOM %}
+    <link rel="alternate" type="application/atom+xml" title="{{ SITENAME }} - Atom Feed" href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}">
+    {% endif %}
+    {% if FEED_ALL_RSS %}
+    <link rel="alternate" type="application/rss+xml" title="{{ SITENAME }} - RSS Feed" href="{{ SITEURL }}/{{ FEED_ALL_RSS }}">
+    {% endif %}
+    
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded">
+        Skip to main content
+    </a>
+    
+    <!-- Header -->
+    <header class="site-header">
+        {% include 'partials/header.html' %}
+    </header>
+    
+    <!-- Main Content -->
+    <main id="main-content" class="site-main">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        {% include 'partials/footer.html' %}
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="{{ SITEURL }}/theme/js/main.js"></script>
+    {% block extra_js %}{% endblock %}
+    
+    <!-- Analytics -->
+    {% if GOOGLE_ANALYTICS %}
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ GOOGLE_ANALYTICS }}');
+    </script>
+    {% endif %}
+</body>
+</html>

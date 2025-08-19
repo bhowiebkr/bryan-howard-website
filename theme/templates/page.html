@@ -1,0 +1,296 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} - {{ SITENAME }}{% endblock %}
+
+{% block description %}{{ page.summary|striptags|truncate(160) if page.summary else page.content|striptags|truncate(160) }}{% endblock %}
+
+{% block og_title %}{{ page.title }}{% endblock %}
+{% block og_description %}{{ page.summary|striptags|truncate(160) if page.summary else page.content|striptags|truncate(160) }}{% endblock %}
+{% block og_url %}/{{ page.url }}{% endblock %}
+
+{% block twitter_title %}{{ page.title }}{% endblock %}
+{% block twitter_description %}{{ page.summary|striptags|truncate(160) if page.summary else page.content|striptags|truncate(160) }}{% endblock %}
+
+{% block body_class %}page-{{ page.slug }}{% endblock %}
+
+{% block content %}
+<div class="container container-narrow">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb-item">
+            <a href="{{ SITEURL }}/" class="breadcrumb-link">Home</a>
+        </div>
+        <span class="breadcrumb-separator">
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </span>
+        <div class="breadcrumb-item">
+            <span class="breadcrumb-current">{{ page.title }}</span>
+        </div>
+    </nav>
+
+    <article class="page">
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1 class="page-title">{{ page.title }}</h1>
+            
+            {% if page.subtitle %}
+            <p class="page-subtitle">{{ page.subtitle }}</p>
+            {% endif %}
+            
+            <!-- Page Meta -->
+            {% if page.date or page.modified %}
+            <div class="page-meta">
+                {% if page.date %}
+                <div class="meta-item">
+                    <i class="fas fa-calendar meta-icon" aria-hidden="true"></i>
+                    <time datetime="{{ page.date.isoformat() }}">Published {{ page.date.strftime('%B %d, %Y') }}</time>
+                </div>
+                {% endif %}
+                
+                {% if page.modified %}
+                <div class="meta-item">
+                    <i class="fas fa-edit meta-icon" aria-hidden="true"></i>
+                    <time datetime="{{ page.modified.isoformat() }}">Updated {{ page.modified.strftime('%B %d, %Y') }}</time>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <!-- Featured Image -->
+            {% if page.featured_image %}
+            <figure class="page-featured-image">
+                <img src="{{ SITEURL }}/{{ page.featured_image }}" alt="{{ page.title }}" loading="lazy">
+                {% if page.featured_image_caption %}
+                <figcaption>{{ page.featured_image_caption }}</figcaption>
+                {% endif %}
+            </figure>
+            {% endif %}
+        </header>
+
+        <!-- Page Content -->
+        <div class="page-content">
+            {{ page.content }}
+        </div>
+
+        {% if page.slug == 'contact' %}
+        <!-- Contact Form Section -->
+        <section class="contact-form-section">
+            <h2>Get In Touch</h2>
+            <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name *</label>
+                        <input type="text" id="name" name="name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email *</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" id="subject" name="subject" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Message *</label>
+                    <textarea id="message" name="message" class="form-input form-textarea" required placeholder="Your message here..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                    Send Message
+                </button>
+            </form>
+        </section>
+        {% endif %}
+    </article>
+</div>
+
+<style>
+/* Page-specific styles */
+.page-header {
+    margin-bottom: var(--space-8);
+    text-align: center;
+}
+
+.page-title {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-4);
+    line-height: var(--leading-tight);
+}
+
+.page-subtitle {
+    font-size: var(--text-xl);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+    line-height: var(--leading-normal);
+}
+
+.page-meta {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+}
+
+.page-featured-image {
+    margin: var(--space-8) 0;
+}
+
+.page-featured-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+}
+
+.page-content {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+}
+
+.page-content h2 {
+    margin-top: var(--space-12);
+    margin-bottom: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border-primary);
+}
+
+.page-content h3 {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-4);
+}
+
+.page-content h4,
+.page-content h5,
+.page-content h6 {
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-3);
+}
+
+.page-content p {
+    margin-bottom: var(--space-6);
+}
+
+.page-content ul,
+.page-content ol {
+    margin-bottom: var(--space-6);
+}
+
+.page-content li {
+    margin-bottom: var(--space-3);
+}
+
+.page-content blockquote {
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin: var(--space-8) 0;
+}
+
+/* Contact Form Styles */
+.contact-form-section {
+    margin-top: var(--space-12);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--border-primary);
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+/* About page specific styles */
+.page-about .page-content {
+    display: grid;
+    gap: var(--space-8);
+}
+
+.about-section {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+}
+
+.about-section h2 {
+    margin-top: 0;
+    border-top: none;
+    padding-top: 0;
+}
+
+/* Projects page specific styles */
+.page-projects .page-content {
+    display: grid;
+    gap: var(--space-6);
+}
+
+.project-item {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    transition: all var(--transition-normal);
+}
+
+.project-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--shadow-lg);
+    border-color: var(--border-secondary);
+}
+
+.project-item h3 {
+    margin-top: 0;
+    margin-bottom: var(--space-3);
+    font-size: var(--text-xl);
+}
+
+.project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.project-links {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: var(--text-3xl);
+    }
+    
+    .page-subtitle {
+        font-size: var(--text-lg);
+    }
+    
+    .page-content {
+        font-size: var(--text-base);
+    }
+    
+    .page-featured-image img {
+        height: 250px;
+    }
+    
+    .page-meta {
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}

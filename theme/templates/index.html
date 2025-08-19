@@ -1,0 +1,375 @@
+{% extends "base.html" %}
+
+{% block title %}{{ SITENAME }}{% if SITESUBTITLE %} - {{ SITESUBTITLE }}{% endif %}{% endblock %}
+
+{% block body_class %}homepage{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">{{ SITENAME }}</h1>
+            {% if SITESUBTITLE %}
+            <p class="hero-subtitle">{{ SITESUBTITLE }}</p>
+            {% endif %}
+            <p class="hero-description">
+                {{ SITEDESCRIPTION or "Welcome to my personal website and blog." }}
+            </p>
+            <div class="hero-actions">
+                <a href="{{ SITEURL }}/about/" class="btn btn-primary">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    Learn About Me
+                </a>
+                <a href="{{ SITEURL }}/archives/" class="btn btn-secondary">
+                    <i class="fas fa-blog" aria-hidden="true"></i>
+                    Read My Blog
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Posts Section -->
+    {% if articles %}
+    <section class="recent-posts-section">
+        <div class="section-header">
+            <h2 class="section-title">Recent Posts</h2>
+            <a href="{{ SITEURL }}/archives/" class="section-link">
+                View All Posts
+                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        </div>
+        
+        <div class="posts-grid">
+            {% for article in articles[:6] %}
+            <article class="post-card">
+                {% if article.featured_image %}
+                <div class="post-image">
+                    <img src="{{ SITEURL }}/{{ article.featured_image }}" alt="{{ article.title }}" loading="lazy">
+                </div>
+                {% endif %}
+                
+                <div class="post-content">
+                    <div class="post-meta">
+                        <time class="post-date" datetime="{{ article.date.isoformat() }}">
+                            {{ article.locale_date }}
+                        </time>
+                        {% if article.category %}
+                        <span class="post-category">
+                            <a href="{{ SITEURL }}/{{ article.category.url }}" class="meta-link">
+                                {{ article.category }}
+                            </a>
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                    <h3 class="post-title">
+                        <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+                    </h3>
+                    
+                    {% if article.summary %}
+                    <p class="post-summary">{{ article.summary|striptags|truncate(150) }}</p>
+                    {% endif %}
+                    
+                    {% if article.tags %}
+                    <div class="post-tags">
+                        {% for tag in article.tags[:3] %}
+                        <a href="{{ SITEURL }}/{{ tag.url }}" class="tag-link">{{ tag }}</a>
+                        {% endfor %}
+                        {% if article.tags|length > 3 %}
+                        <span class="tag-more">+{{ article.tags|length - 3 }} more</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Featured Projects Section -->
+    <section class="featured-projects-section">
+        <div class="section-header">
+            <h2 class="section-title">Featured Projects</h2>
+            <a href="{{ SITEURL }}/projects/" class="section-link">
+                View All Projects
+                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        </div>
+        
+        <div class="projects-grid">
+            <!-- These would be populated from a projects data file or pages -->
+            <div class="project-card">
+                <div class="project-content">
+                    <h3 class="project-title">Personal Website</h3>
+                    <p class="project-description">
+                        A modern, responsive personal website built with Pelican and deployed on GitHub Pages.
+                    </p>
+                    <div class="project-tech">
+                        <span class="badge badge-primary">Python</span>
+                        <span class="badge badge-primary">Pelican</span>
+                        <span class="badge badge-primary">CSS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/chriswiegman/bryan-howard-website" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                            View Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-content">
+                    <h3 class="project-title">Coming Soon</h3>
+                    <p class="project-description">
+                        More exciting projects will be featured here as they are completed.
+                    </p>
+                    <div class="project-tech">
+                        <span class="badge badge-secondary">Various</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Preview Section -->
+    <section class="about-preview-section">
+        <div class="about-card">
+            <div class="about-content">
+                <h2 class="about-title">About Me</h2>
+                <p class="about-text">
+                    I'm passionate about technology, continuous learning, and sharing knowledge through writing and projects.
+                    This website serves as both a portfolio and a place to document my journey in software development.
+                </p>
+                <a href="{{ SITEURL }}/about/" class="btn btn-primary">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    Learn More About Me
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+/* Homepage-specific styles */
+.hero-section {
+    padding: var(--space-16) 0 var(--space-12);
+    text-align: center;
+}
+
+.hero-title {
+    font-size: var(--text-5xl);
+    margin-bottom: var(--space-4);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: var(--text-xl);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+}
+
+.hero-description {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto var(--space-8);
+}
+
+.hero-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-8);
+}
+
+.section-title {
+    font-size: var(--text-3xl);
+    margin-bottom: 0;
+}
+
+.section-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+}
+
+.section-link:hover {
+    text-decoration: none;
+    color: var(--color-primary-hover);
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-6);
+    margin-bottom: var(--space-12);
+}
+
+.post-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px var(--shadow-lg);
+    border-color: var(--border-secondary);
+}
+
+.post-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.post-content {
+    padding: var(--space-6);
+}
+
+.post-meta {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+}
+
+.post-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+}
+
+.post-title a:hover {
+    color: var(--color-primary);
+}
+
+.post-summary {
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-4);
+}
+
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: center;
+}
+
+.tag-more {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-6);
+    margin-bottom: var(--space-12);
+}
+
+.project-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    transition: all var(--transition-normal);
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--shadow-lg);
+    border-color: var(--border-secondary);
+}
+
+.project-title {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-3);
+}
+
+.project-description {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-4);
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.project-links {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.about-preview-section {
+    padding: var(--space-8) 0;
+}
+
+.about-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    text-align: center;
+}
+
+.about-title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-4);
+}
+
+.about-text {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto var(--space-6);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: var(--text-4xl);
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: var(--space-4);
+        text-align: center;
+    }
+    
+    .posts-grid,
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}

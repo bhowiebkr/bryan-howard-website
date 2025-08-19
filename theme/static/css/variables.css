@@ -1,0 +1,191 @@
+/* Bryan Howard Dark Theme - CSS Custom Properties */
+
+:root {
+  /* === PRIMARY COLORS === */
+  
+  /* Background Colors */
+  --bg-primary: #0a0a0a;        /* Main background - deep black */
+  --bg-secondary: #1a1a1a;      /* Card/section backgrounds */
+  --bg-tertiary: #2a2a2a;       /* Elevated elements, modals */
+  --bg-code: #1e1e1e;           /* Code blocks background */
+  --bg-input: #252525;          /* Form inputs */
+  
+  /* Text Colors */
+  --text-primary: #ffffff;       /* Main text - pure white */
+  --text-secondary: #e0e0e0;     /* Secondary text */
+  --text-muted: #a0a0a0;         /* Muted text, metadata */
+  --text-dim: #707070;           /* Very dim text */
+  --text-inverse: #1a1a1a;       /* Text on light backgrounds */
+  
+  /* === ACCENT COLORS === */
+  
+  /* Primary Brand Color - Blue */
+  --color-primary: #4a9eff;      /* Main brand blue */
+  --color-primary-hover: #6bb3ff; /* Hover state */
+  --color-primary-active: #2d7ce0; /* Active/pressed state */
+  --color-primary-soft: rgba(74, 158, 255, 0.1); /* Soft background */
+  
+  /* Secondary Accent - Green */
+  --color-secondary: #10d980;    /* Success, positive actions */
+  --color-secondary-hover: #2de58c;
+  --color-secondary-soft: rgba(16, 217, 128, 0.1);
+  
+  /* Warning/Alert Colors */
+  --color-warning: #ff9500;      /* Warning states */
+  --color-warning-hover: #ffad33;
+  --color-warning-soft: rgba(255, 149, 0, 0.1);
+  
+  /* Error/Danger Colors */
+  --color-error: #ff453a;        /* Error states */
+  --color-error-hover: #ff6b61;
+  --color-error-soft: rgba(255, 69, 58, 0.1);
+  
+  /* === BORDER COLORS === */
+  
+  --border-primary: #333333;     /* Main borders */
+  --border-secondary: #4a4a4a;   /* Hover/focus borders */
+  --border-subtle: #2a2a2a;      /* Very subtle borders */
+  --border-accent: var(--color-primary); /* Accent borders */
+  
+  /* === SHADOW COLORS === */
+  
+  --shadow-sm: rgba(0, 0, 0, 0.2);
+  --shadow-md: rgba(0, 0, 0, 0.3);
+  --shadow-lg: rgba(0, 0, 0, 0.4);
+  --shadow-xl: rgba(0, 0, 0, 0.5);
+  
+  /* === SEMANTIC COLORS === */
+  
+  /* Social Media Colors */
+  --color-github: #f0f6fc;
+  --color-youtube: #ff0000;
+  --color-linkedin: #0077b5;
+  --color-twitter: #1da1f2;
+  
+  /* Code Syntax Highlighting */
+  --code-keyword: #ff79c6;       /* Keywords */
+  --code-string: #f1fa8c;        /* Strings */
+  --code-comment: #6272a4;       /* Comments */
+  --code-function: #50fa7b;      /* Functions */
+  --code-variable: #8be9fd;      /* Variables */
+  --code-number: #bd93f9;        /* Numbers */
+  
+  /* === TYPOGRAPHY === */
+  
+  /* Font Families */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  --font-heading: var(--font-primary);
+  
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Font Sizes (Modular Scale 1.25) */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+  --text-5xl: 3rem;      /* 48px */
+  --text-6xl: 3.75rem;   /* 60px */
+  
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+  
+  /* === SPACING === */
+  
+  /* Spacing Scale (0.25rem base) */
+  --space-1: 0.25rem;    /* 4px */
+  --space-2: 0.5rem;     /* 8px */
+  --space-3: 0.75rem;    /* 12px */
+  --space-4: 1rem;       /* 16px */
+  --space-5: 1.25rem;    /* 20px */
+  --space-6: 1.5rem;     /* 24px */
+  --space-8: 2rem;       /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+  --space-24: 6rem;      /* 96px */
+  --space-32: 8rem;      /* 128px */
+  
+  /* === LAYOUT === */
+  
+  /* Container Widths */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+  
+  /* Border Radius */
+  --radius-sm: 0.125rem;  /* 2px */
+  --radius-md: 0.375rem;  /* 6px */
+  --radius-lg: 0.5rem;    /* 8px */
+  --radius-xl: 0.75rem;   /* 12px */
+  --radius-2xl: 1rem;     /* 16px */
+  --radius-full: 9999px;  /* Full circle */
+  
+  /* === TRANSITIONS === */
+  
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+  
+  /* === Z-INDEX === */
+  
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal: 1040;
+  --z-popover: 1050;
+  --z-tooltip: 1060;
+  
+  /* === BREAKPOINTS === */
+  
+  /* Mobile-first breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* === LIGHT THEME OVERRIDES === */
+/* (Optional - for future light theme toggle) */
+
+@media (prefers-color-scheme: light) {
+  .theme-auto {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --text-primary: #1a1a1a;
+    --text-secondary: #495057;
+    --text-muted: #6c757d;
+    --border-primary: #dee2e6;
+    --border-secondary: #adb5bd;
+  }
+}
+
+/* Theme toggle classes for future implementation */
+.theme-dark {
+  color-scheme: dark;
+}
+
+.theme-light {
+  color-scheme: light;
+}
+
+.theme-auto {
+  color-scheme: light dark;
+}

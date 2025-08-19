@@ -50,9 +50,9 @@ DELETE_OUTPUT_DIRECTORY = True
 OUTPUT_RETENTION = ['.git', '.github']
 
 # Theme Configuration  
-# Using default theme for Phase 2, custom theme will be added in Phase 3
+THEME = 'theme'
 DIRECT_TEMPLATES = ['index', 'tags', 'categories', 'archives']
-# SITEMAP_SAVE_AS = 'sitemap.xml'  # Disabled until custom theme in Phase 3
+SITEMAP_SAVE_AS = 'sitemap.xml'
 
 # Blog Settings
 DEFAULT_PAGINATION = 10
@@ -69,12 +69,12 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-# Social Media Links
+# Social Media Links (with Font Awesome icons)
 SOCIAL = (
-    ('GitHub', 'https://github.com/bhowiebkr'),
-    ('YouTube', 'https://www.youtube.com/@BryanHoward'),
-    ('LinkedIn', 'https://linkedin.com/in/bryanhoward'),
-    ('Twitter', 'https://twitter.com/bhowiebkr'),
+    ('GitHub', 'https://github.com/bhowiebkr', 'fab fa-github'),
+    ('YouTube', 'https://www.youtube.com/@BryanHoward', 'fab fa-youtube'),
+    ('LinkedIn', 'https://linkedin.com/in/bryanhoward', 'fab fa-linkedin'),
+    ('Twitter', 'https://twitter.com/bhowiebkr', 'fab fa-twitter'),
 )
 
 # Menu Configuration
@@ -91,24 +91,24 @@ MENUITEMS = (
 # Plugin Configuration
 PLUGIN_PATHS = ['plugins']
 PLUGINS = [
-    # 'sitemap',  # Disabled until custom theme in Phase 3
+    'sitemap',
 ]
 
-# Sitemap Configuration (disabled until Phase 3)
-# SITEMAP = {
-#     'format': 'xml',
-#     'priorities': {
-#         'articles': 0.7,
-#         'indexes': 0.5,
-#         'pages': 0.6,
-#     },
-#     'changefreqs': {
-#         'articles': 'weekly',
-#         'indexes': 'daily',
-#         'pages': 'monthly',
-#     },
-#     'exclude': ['tag/', 'category/', 'author/']
-# }
+# Sitemap Configuration
+SITEMAP = {
+    'format': 'xml',
+    'priorities': {
+        'articles': 0.7,
+        'indexes': 0.5,
+        'pages': 0.6,
+    },
+    'changefreqs': {
+        'articles': 'weekly',
+        'indexes': 'daily',
+        'pages': 'monthly',
+    },
+    'exclude': ['tag/', 'category/', 'author/']
+}
 
 # Date Format
 DEFAULT_DATE_FORMAT = '%B %d, %Y'
@@ -118,6 +118,17 @@ DATE_FORMATS = {
 
 # Typography
 TYPOGRIFY = True
+
+# Theme-specific Settings
+COPYRIGHT_YEAR = '2025'
+COPYRIGHT_NAME = 'Bryan Howard'
+TWITTER_USERNAME = 'bhowiebkr'
+
+# SEO and Accessibility
+DISPLAY_ARTICLE_INFO_ON_INDEX = True
+DISPLAY_RECENT_POSTS_ON_SIDEBAR = False
+DISPLAY_CATEGORIES_ON_SIDEBAR = False
+DISPLAY_TAGS_ON_SIDEBAR = False
 
 # Development Settings
 LOAD_CONTENT_CACHE = False

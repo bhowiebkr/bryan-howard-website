@@ -1,0 +1,108 @@
+<div class="footer-container">
+    <!-- Footer Content -->
+    <div class="footer-content">
+        <!-- About Section -->
+        <div class="footer-section">
+            <h3 class="footer-title">{{ SITENAME }}</h3>
+            <p class="footer-description">
+                {{ SITEDESCRIPTION }}
+            </p>
+            
+            <!-- Social Links -->
+            {% if SOCIAL %}
+            <div class="footer-social">
+                <h4 class="social-title">Connect</h4>
+                <ul class="social-list">
+                    {% for name, link, icon in SOCIAL %}
+                    <li class="social-item">
+                        <a href="{{ link }}" class="social-link" target="_blank" rel="noopener noreferrer">
+                            <i class="{{ icon }}" aria-hidden="true"></i>
+                            <span>{{ name }}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h4 class="footer-title">Quick Links</h4>
+            <ul class="footer-links">
+                <li><a href="{{ SITEURL }}/" class="footer-link">Home</a></li>
+                <li><a href="{{ SITEURL }}/about/" class="footer-link">About</a></li>
+                <li><a href="{{ SITEURL }}/archives/" class="footer-link">Blog</a></li>
+                <li><a href="{{ SITEURL }}/projects/" class="footer-link">Projects</a></li>
+                <li><a href="{{ SITEURL }}/contact/" class="footer-link">Contact</a></li>
+            </ul>
+        </div>
+        
+        <!-- Recent Posts -->
+        <div class="footer-section">
+            <h4 class="footer-title">Recent Posts</h4>
+            <ul class="footer-posts">
+                {% for article in articles[:3] %}
+                <li class="footer-post">
+                    <a href="{{ SITEURL }}/{{ article.url }}" class="footer-post-link">
+                        <span class="post-title">{{ article.title }}</span>
+                        <time class="post-date" datetime="{{ article.date.isoformat() }}">
+                            {{ article.locale_date }}
+                        </time>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <!-- Newsletter/RSS -->
+        <div class="footer-section">
+            <h4 class="footer-title">Stay Updated</h4>
+            <p class="footer-description">
+                Get notified about new posts and updates.
+            </p>
+            
+            {% if FEED_ALL_ATOM or FEED_ALL_RSS %}
+            <div class="feed-links">
+                {% if FEED_ALL_ATOM %}
+                <a href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" class="feed-link" target="_blank" rel="noopener">
+                    <i class="fas fa-rss" aria-hidden="true"></i>
+                    <span>Atom Feed</span>
+                </a>
+                {% endif %}
+                {% if FEED_ALL_RSS %}
+                <a href="{{ SITEURL }}/{{ FEED_ALL_RSS }}" class="feed-link" target="_blank" rel="noopener">
+                    <i class="fas fa-rss" aria-hidden="true"></i>
+                    <span>RSS Feed</span>
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <div class="footer-bottom-content">
+            <div class="copyright">
+                <p>
+                    &copy; {{ COPYRIGHT_YEAR or "2025" }} {{ COPYRIGHT_NAME or AUTHOR }}. All rights reserved.
+                </p>
+            </div>
+            
+            <div class="footer-meta">
+                <p>
+                    Built with <a href="https://getpelican.com/" target="_blank" rel="noopener">Pelican</a> 
+                    and hosted on <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>
+                </p>
+            </div>
+            
+            <div class="footer-links-meta">
+                <a href="{{ SITEURL }}/sitemap.xml" class="footer-link-meta">Sitemap</a>
+                {% if FEED_ALL_ATOM %}
+                <a href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" class="footer-link-meta">Feed</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
