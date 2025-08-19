@@ -78,13 +78,14 @@ SOCIAL = (
 )
 
 # Menu Configuration
-DISPLAY_PAGES_ON_MENU = True
+DISPLAY_PAGES_ON_MENU = False  # Disable auto-adding pages to avoid duplicates
 DISPLAY_CATEGORIES_ON_MENU = False
 MENUITEMS = (
     ('Home', '/'),
     ('About', '/about/'),
     ('Blog', '/archives/'),
     ('Projects', '/projects/'),
+    ('Contact', '/contact/'),
 )
 
 # Plugin Configuration
