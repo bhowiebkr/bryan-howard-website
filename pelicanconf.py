@@ -74,6 +74,7 @@ SOCIAL = (
     ('GitHub', 'https://github.com/bhowiebkr', 'fab fa-github'),
     ('YouTube', 'https://www.youtube.com/@BryanHoward', 'fab fa-youtube'),
     ('LinkedIn', 'https://www.linkedin.com/in/bryanhoward2/', 'fab fa-linkedin'),
+    ('Buy Me a Coffee', 'https://buymeacoffee.com/bryanhoward', 'fas fa-coffee'),
 )
 
 # Menu Configuration

@@ -10,7 +10,7 @@ I'm always interested in connecting with fellow developers, content creators, an
 
 - **GitHub**: [bhowiebkr](https://github.com/bhowiebkr)
 - **YouTube**: [@BryanHoward](https://www.youtube.com/@BryanHoward)
-- **LinkedIn**: [Bryan Howard](https://linkedin.com/in/bryanhoward)
+- **LinkedIn**: [Bryan Howard](https://www.linkedin.com/in/bryanhoward2/)
 
 ## Collaboration
 
@@ -23,6 +23,17 @@ I'm open to:
 ## Response Time
 
 I typically respond to professional inquiries within 24-48 hours during weekdays.
+
+## Support My Work
+
+Enjoy my content? Consider supporting me with a coffee! Your support helps me continue creating tutorials and open source projects.
+
+<div class="support-section">
+    <a href="https://buymeacoffee.com/bryanhoward" class="coffee-button" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-coffee" aria-hidden="true"></i>
+        <span>Buy Me a Coffee</span>
+    </a>
+</div>
 
 ---
 

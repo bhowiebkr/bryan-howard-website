@@ -300,6 +300,61 @@
   text-decoration: none;
 }
 
+/* Support Links */
+.support-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.coffee-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: linear-gradient(135deg, #FF813F, #FF6B35);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-sm);
+  transition: all var(--transition-normal);
+  box-shadow: 0 2px 8px rgba(255, 129, 63, 0.3);
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  max-width: 200px;
+}
+
+.coffee-button:hover {
+  background: linear-gradient(135deg, #FF6B35, #FF5722);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 129, 63, 0.4);
+  text-decoration: none;
+  color: white;
+}
+
+.coffee-button:focus {
+  outline: 2px solid #FF813F;
+  outline-offset: 2px;
+}
+
+.coffee-button i {
+  font-size: var(--text-base);
+}
+
+/* Support Section for Content Pages */
+.support-section {
+  display: flex;
+  justify-content: center;
+  margin: var(--space-6) 0;
+  padding: var(--space-6);
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-primary);
+}
+
 /* Footer Posts */
 .footer-posts {
   list-style: none;

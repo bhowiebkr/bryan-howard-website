@@ -32,6 +32,17 @@ When I'm not coding or creating content, I enjoy exploring new technologies, con
 
 This site is built with [Pelican](https://getpelican.com/), a Python-powered static site generator, and hosted on [GitHub Pages](https://pages.github.com/). It serves as both a portfolio of my work and a platform for sharing longer-form content that complements my YouTube channel.
 
+## Support My Work
+
+If you enjoy my content and find my tutorials helpful, consider supporting me with a coffee! Your support helps me continue creating quality content and open source projects.
+
+<div class="support-section">
+    <a href="https://buymeacoffee.com/bryanhoward" class="coffee-button" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-coffee" aria-hidden="true"></i>
+        <span>Buy Me a Coffee</span>
+    </a>
+</div>
+
 ---
 
 *Want to connect? Check out the [contact page](/contact/) for all the ways to reach me.*
