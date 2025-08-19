@@ -34,7 +34,7 @@ LOAD_CONTENT_CACHE = True
 
 # Production Plugins
 PLUGINS = [
-    'sitemap',
+    # 'sitemap',  # Disabled until custom theme in Phase 3
     # YouTube and GitHub plugins will be added in Phase 4
 ]
 

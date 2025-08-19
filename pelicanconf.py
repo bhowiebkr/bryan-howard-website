@@ -49,10 +49,10 @@ RELATIVE_URLS = True
 DELETE_OUTPUT_DIRECTORY = True
 OUTPUT_RETENTION = ['.git', '.github']
 
-# Theme Configuration
-# THEME = 'theme'  # Custom theme will be added in Phase 3
+# Theme Configuration  
+# Using default theme for Phase 2, custom theme will be added in Phase 3
 DIRECT_TEMPLATES = ['index', 'tags', 'categories', 'archives']
-# SITEMAP_SAVE_AS = 'sitemap.xml'  # Will be enabled with custom theme in Phase 3
+# SITEMAP_SAVE_AS = 'sitemap.xml'  # Disabled until custom theme in Phase 3
 
 # Blog Settings
 DEFAULT_PAGINATION = 10
@@ -91,10 +91,10 @@ MENUITEMS = (
 # Plugin Configuration
 PLUGIN_PATHS = ['plugins']
 PLUGINS = [
-    # 'sitemap',  # Will be enabled with custom theme in Phase 3
+    # 'sitemap',  # Disabled until custom theme in Phase 3
 ]
 
-# Sitemap Configuration (disabled for default theme)
+# Sitemap Configuration (disabled until Phase 3)
 # SITEMAP = {
 #     'format': 'xml',
 #     'priorities': {
