@@ -71,10 +71,10 @@ AUTHOR_FEED_RSS = None
 
 # Social Media Links
 SOCIAL = (
-    ('GitHub', 'https://github.com/bhowiebkr', 'fab fa-github'),
-    ('YouTube', 'https://www.youtube.com/@BryanHoward', 'fab fa-youtube'),
-    ('LinkedIn', 'https://linkedin.com/in/bryanhoward', 'fab fa-linkedin'),
-    ('Twitter', 'https://twitter.com/bhowiebkr', 'fab fa-twitter'),
+    ('GitHub', 'https://github.com/bhowiebkr'),
+    ('YouTube', 'https://www.youtube.com/@BryanHoward'),
+    ('LinkedIn', 'https://linkedin.com/in/bryanhoward'),
+    ('Twitter', 'https://twitter.com/bhowiebkr'),
 )
 
 # Menu Configuration
