@@ -8,7 +8,7 @@ sys.path.append(os.curdir)
 from pelicanconf import *
 
 # Production Site URL
-SITEURL = 'https://www.bryan-howard.ca'
+SITEURL = 'https://bryan-howard.ca'
 RELATIVE_URLS = False
 
 # Feed Generation for Production
