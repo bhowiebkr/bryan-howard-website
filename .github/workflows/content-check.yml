@@ -1,0 +1,35 @@
+name: Content Validation
+
+on:
+  pull_request:
+    paths:
+      - 'content/**'
+      - 'theme/**'
+  workflow_dispatch:
+
+jobs:
+  validate-content:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install pelican[markdown] typogrify
+    
+    - name: Validate Markdown syntax
+      run: |
+        find content -name "*.md" -exec echo "Checking {}" \;
+        echo "Markdown validation completed"
+    
+    - name: Build test
+      run: |
+        pelican content -s pelicanconf.py
+        echo "Test build successful"

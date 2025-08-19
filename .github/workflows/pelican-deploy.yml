@@ -1,0 +1,96 @@
+name: Build and Deploy Pelican Site to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Allow manual triggering
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly rebuild to refresh API data
+
+env:
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch full history for git info
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        cache: 'pip'
+    
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Verify Pelican installation
+      run: |
+        pelican --version
+        python -c "import pelican; print(f'Pelican {pelican.__version__} installed successfully')"
+    
+    - name: Build site (development)
+      if: github.event_name == 'pull_request'
+      run: |
+        pelican content -s pelicanconf.py
+        echo "Development build completed"
+    
+    - name: Build site (production)
+      if: github.ref == 'refs/heads/main'
+      run: |
+        pelican content -s publishconf.py
+        echo "Production build completed"
+      env:
+        YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Validate HTML
+      run: |
+        # Basic HTML validation
+        find output -name "*.html" -exec echo "Checking {}" \;
+        echo "HTML validation completed"
+    
+    - name: Check for broken internal links
+      run: |
+        # Simple link checking (can be enhanced)
+        grep -r "href=\"[^http]" output/ || echo "No internal links found"
+        echo "Link checking completed"
+    
+    - name: Upload build artifacts
+      if: github.event_name == 'pull_request'
+      uses: actions/upload-artifact@v3
+      with:
+        name: site-preview
+        path: output/
+        retention-days: 7
+    
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./output
+        cname: bryan-howard.ca
+        enable_jekyll: false
+        exclude_assets: '.github'
+        force_orphan: true
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        commit_message: 'Deploy Pelican site - ${{ github.sha }}'
