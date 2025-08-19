@@ -73,8 +73,7 @@ AUTHOR_FEED_RSS = None
 SOCIAL = (
     ('GitHub', 'https://github.com/bhowiebkr', 'fab fa-github'),
     ('YouTube', 'https://www.youtube.com/@BryanHoward', 'fab fa-youtube'),
-    ('LinkedIn', 'https://linkedin.com/in/bryanhoward', 'fab fa-linkedin'),
-    ('Twitter', 'https://twitter.com/bhowiebkr', 'fab fa-twitter'),
+    ('LinkedIn', 'https://www.linkedin.com/in/bryanhoward2/', 'fab fa-linkedin'),
 )
 
 # Menu Configuration
@@ -126,7 +125,7 @@ TYPOGRIFY = True
 # Theme-specific Settings
 COPYRIGHT_YEAR = '2025'
 COPYRIGHT_NAME = 'Bryan Howard'
-TWITTER_USERNAME = 'bhowiebkr'
+# TWITTER_USERNAME = 'bhowiebkr'  # Twitter removed
 
 # SEO and Accessibility
 DISPLAY_ARTICLE_INFO_ON_INDEX = True
