@@ -20,7 +20,7 @@ But these days, I'm just as excited about precision measurement tools and DIY CN
 
 ## The scattered digital life problem
 
-Here's the thing - I've got content everywhere. My [YouTube channel](https://youtube.com/@BryanHoward) is mostly PrintNC builds and CNC tutorials. My [GitHub](https://github.com/bhowiebkr) has Python tools I've built over the years, including some precision measurement stuff that even got featured on Hackaday. I'm active on forums like Practical Machinist, sharing techniques for measuring surface flatness with webcams and lasers (because who doesn't love achieving micron-level precision with a $15 webcam?).
+Here's the thing - I've got content everywhere. My [YouTube channel](https://youtube.com/@BryanHoward) is mostly PrintNC builds and CNC tutorials. My [GitHub](https://github.com/bhowiebkr) has Python tools I've built over the years, including some precision measurement stuff that even got featured on Hackaday. I'm active in the [PrintNC Discord community](https://discord.com/invite/printnc-diy-cnc-hobby-machining-making-648972213734604807), sharing techniques for measuring surface flatness with webcams and lasers (because who doesn't love achieving micron-level precision with a $15 webcam?).
 
 The problem is, none of these platforms are great for the kind of long-form writing I want to do. YouTube is perfect for showing how to build something, but terrible for explaining the theory behind why it works. GitHub is great for code, but not so much for the stories about why I built something or what I learned along the way.
 

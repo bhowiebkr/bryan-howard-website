@@ -75,7 +75,7 @@ I believe in sharing knowledge and building tools that enable others to create. 
 
 ### 📰 Media Coverage
 - **Hackaday.com Feature** - "Laser And Webcam Team Up For Micron-Resolution Flatness Measurements"
-- **Practical Machinist Forum** - Regular contributor and technical resource
+- **PrintNC Discord Community** - Regular contributor and technical resource
 
 ### 🏆 GitHub Achievements
 - **Pull Shark (x2)** - Recognized for significant pull request contributions

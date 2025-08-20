@@ -2,7 +2,7 @@
 
 ## Overview
 
-Bryan Howard is a technology professional based in Toronto, Canada, with expertise in VFX (Visual Effects), VR (Virtual Reality), and game development. He combines technical programming skills with creative engineering to build innovative tools and solutions.
+Bryan Howard is a technology professional based in Toronto, Canada, with expertise in VFX (Visual Effects), VR (Virtual Reality), and game development. A Toronto Film School graduate with 20+ years of industry experience, he combines technical programming skills with creative engineering to build innovative tools and solutions.
 
 ## Technical Expertise
 
@@ -22,10 +22,10 @@ Bryan Howard is a technology professional based in Toronto, Canada, with experti
 
 ### Open Source Contributions
 
-- **PyFlowGraph** - Python-based visual programming interface for creating node-based workflows
-- **laser-level-webcam** - Precision measurement tool using webcam and laser level technology for measuring object height in microns (featured in YouTube tutorials)
-- **python-node-editor** - GUI framework for organizing reusable Python code in visual node networks
-- **PrintNC_Solidworks** - Open-source high-performance CNC machine design and engineering
+- **PyFlowGraph** - Highly interactive, node-based visual scripting editor built with Python and PySide6 for dynamic node creation and connection
+- **laser-level-webcam** - Revolutionary precision measurement tool featured on Hackaday.com, achieving micron-level accuracy using affordable consumer electronics
+- **python-node-editor** - GUI framework for organizing reusable Python code in visual node networks with modular approach
+- **PrintNC_Solidworks** - Contributor to 100% free and open-source high-performance CNC machine designs
 
 ## Professional Background
 
@@ -54,6 +54,13 @@ Bryan has 20+ years of professional visual effects experience, with credits on m
 - **LinkedIn**: [bryanhoward2](https://linkedin.com/in/bryanhoward2) - Professional networking and industry connections
 - **Hackaday.io**: [bhowiebkr](https://hackaday.io/bhowiebkr) - Engineering projects and maker community participation
 
+## Recognition & Community Impact
+
+Bryan's innovative work has gained recognition in the maker and engineering communities:
+- **Hackaday.com Feature** - Laser measurement system showcased for achieving professional-grade precision with consumer electronics
+- **PrintNC Discord Community** - Active contributor sharing precision measurement techniques and CNC builds
+- **GitHub Community** - Multiple repositories with practical tools for VFX and manufacturing applications
+
 ## Philosophy
 
-Bryan's approach combines practical engineering with creative problem-solving, focusing on building tools that enable others to create. His open-source contributions demonstrate a commitment to sharing knowledge and advancing the broader technology community.
+Bryan's approach combines practical engineering with creative problem-solving, focusing on building tools that enable others to create. His work demonstrates how affordable technology can achieve professional-grade results, democratizing access to precision tools. His open-source contributions reflect a commitment to sharing knowledge and advancing the broader technology community.

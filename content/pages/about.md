@@ -51,7 +51,7 @@ My programming expertise spans:
 My innovative work has gained recognition across multiple communities:
 
 - **Hackaday.com Feature** - Laser measurement system showcased for achieving professional-grade precision with consumer electronics
-- **Practical Machinist Forum** - Active contributor sharing precision measurement techniques
+- **PrintNC Discord Community** - Active contributor sharing precision measurement techniques and CNC builds
 - **GitHub Community** - Multiple repositories with practical tools for VFX and manufacturing applications
 
 ## Areas of Expertise
