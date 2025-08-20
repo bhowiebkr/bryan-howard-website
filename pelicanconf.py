@@ -5,8 +5,8 @@
 AUTHOR = 'Bryan Howard'
 SITENAME = 'Bryan Howard'
 SITEURL = ''  # Leave empty for development
-SITESUBTITLE = 'Developer, Content Creator, Problem Solver'
-SITEDESCRIPTION = 'Personal website of Bryan Howard featuring development tutorials, project showcases, and insights from YouTube content creation.'
+SITESUBTITLE = 'VFX Artist, Engineer, Open Source Developer'
+SITEDESCRIPTION = 'Toronto-based technology professional with 20+ years in VFX, specializing in Python development, CNC machining, and innovative precision measurement tools. Featured projects on Hackaday.com and major Hollywood productions.'
 
 # Language and Timezone
 DEFAULT_LANG = 'en'
@@ -74,6 +74,8 @@ SOCIAL = (
     ('GitHub', 'https://github.com/bhowiebkr', 'fab fa-github'),
     ('YouTube', 'https://www.youtube.com/@BryanHoward', 'fab fa-youtube'),
     ('LinkedIn', 'https://www.linkedin.com/in/bryanhoward2/', 'fab fa-linkedin'),
+    ('Hackaday.io', 'https://hackaday.io/bhowiebkr', 'fas fa-microchip'),
+    ('IMDB', 'https://www.imdb.com/name/nm2389483/', 'fas fa-film'),
     ('Buy Me a Coffee', 'https://buymeacoffee.com/bryanhoward', 'fas fa-coffee'),
 )
 
