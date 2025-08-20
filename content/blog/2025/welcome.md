@@ -1,6 +1,6 @@
 Title: Finally, a place to call home
-Date: 2025-01-15 10:00
-Modified: 2025-01-15 12:00
+Date: 2025-08-20 10:00
+Modified: 2025-08-20 12:00
 Category: General
 Tags: personal, vfx, cnc, python, printNC
 Slug: welcome
@@ -33,7 +33,7 @@ I want this website to be where I can really dig into topics I care about. Thing
 - **Open source projects** - I believe in sharing knowledge, and I want to write about the projects I'm working on and why they matter
 - **The intersection of entertainment and engineering** - It's fascinating how skills from one world apply to the other
 
-## No marketing nonsense, I promise
+## No marketing nonsense here
 
 This isn't going to be one of those blogs full of "10 Amazing Tips" or "You Won't Believe What Happened Next." I'm just going to write about stuff I find interesting and hope you do too. If you're into PrintNC machines, Python automation, or just curious about how visual effects get made, you might find something useful here.
 
