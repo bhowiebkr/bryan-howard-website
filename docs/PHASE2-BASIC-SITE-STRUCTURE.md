@@ -192,8 +192,8 @@ cat > pelicanconf.py << 'EOF'
 AUTHOR = 'Bryan Howard'
 SITENAME = 'Bryan Howard'
 SITEURL = ''  # Leave empty for development
-SITESUBTITLE = 'Developer, Content Creator, Problem Solver'
-SITEDESCRIPTION = 'Personal website of Bryan Howard featuring development tutorials, project showcases, and insights from YouTube content creation.'
+SITESUBTITLE = 'VFX Artist, Engineer, Open Source Developer'
+SITEDESCRIPTION = 'Toronto-based technology professional with 20+ years in VFX, specializing in Python development, CNC machining, and innovative precision measurement tools. Featured projects on Hackaday.com and major Hollywood productions.'
 
 # Language and Timezone
 DEFAULT_LANG = 'en'
