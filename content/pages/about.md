@@ -26,7 +26,7 @@ With over 20 years of professional VFX experience, I've contributed to major Hol
 *[Full IMDB Profile: nm2389483](https://www.imdb.com/name/nm2389483/)*
 
 ### 🔧 Engineering & Innovation
-I specialize in developing precision measurement tools and CNC machining solutions. My laser measurement system was featured on **Hackaday.com** for achieving professional-grade precision using affordable consumer electronics.
+I specialize in developing precision measurement tools and DIY CNC machines, particularly the open-source **PrintNC** project. Most of my YouTube channel focuses on PrintNC builds, modifications, and precision measurement techniques. My laser measurement system was featured on **Hackaday.com** for achieving professional-grade precision using affordable consumer electronics.
 
 ### 💻 Software Development
 My programming expertise spans:
